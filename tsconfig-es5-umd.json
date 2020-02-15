@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "umd",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "inlineSources": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "declaration": true,
+    "outDir": "C:\\c_dev\\apacheroot\\angular\\ref\\ngx-facebook\\dist\\umd",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "newLine": "LF"
+  },
+  "exclude": [
+    "node_modules",
+    "scripts"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot"
+  }
+}

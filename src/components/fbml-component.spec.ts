@@ -1,12 +1,15 @@
-import { FBMLAttribute, FBMLComponent, FBMLInstanceMethod } from './fbml-component';
-import { Component, ElementRef, Renderer, DebugElement } from '@angular/core';
+import {
+  FBMLAttribute,
+  FBMLComponent,
+  FBMLInstanceMethod
+} from './fbml-component';
+import { Component, ElementRef, Renderer2, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 @Component({
   template: ''
 })
 class FBTestComponent extends FBMLComponent {
-
   _instance = {
     testMethod: () => 'success',
     testMethodWithArgs: (...args: any[]) => args.length
@@ -15,46 +18,44 @@ class FBTestComponent extends FBMLComponent {
   @FBMLAttribute
   testAttr: string;
 
-  constructor(el: ElementRef, rnd: Renderer) {
+  constructor(el: ElementRef, rnd: Renderer2) {
     super(el, rnd, 'fb-test');
   }
 
   @FBMLInstanceMethod
-  testMethod(): string { return; }
+  testMethod(): string {
+    return;
+  }
 
   @FBMLInstanceMethod
-  testMethodWithArgs(arg1: string, arg2: string): number { return; }
-
+  testMethodWithArgs(arg1: string, arg2: string): number {
+    return;
+  }
 }
 
 describe('FBMLComponent', () => {
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FBTestComponent ]
+      declarations: [FBTestComponent]
     }).compileComponents();
   }));
 
   it('should create an element with class fb-test', () => {
-
     const instance = TestBed.createComponent(FBTestComponent);
     instance.detectChanges();
     expect(instance.componentInstance).toBeDefined();
     expect(Object.keys(instance.debugElement.classes)).toContain('fb-test');
-
   });
-
 });
 
 describe('FBMLAttribute', () => {
-
   let de: DebugElement,
     comp: FBTestComponent,
     fixture: ComponentFixture<FBTestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FBTestComponent ]
+      declarations: [FBTestComponent]
     }).compileComponents();
   }));
 
@@ -72,18 +73,16 @@ describe('FBMLAttribute', () => {
     // should return value we set before
     expect(comp.testAttr).toEqual('test-val');
   });
-
 });
 
 describe('FBMLInstanceMethod', () => {
-
   let de: DebugElement,
     comp: FBTestComponent,
     fixture: ComponentFixture<FBTestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FBTestComponent ]
+      declarations: [FBTestComponent]
     }).compileComponents();
   }));
 
@@ -103,8 +102,10 @@ describe('FBMLInstanceMethod', () => {
   it('should do call with args to instance method', () => {
     spyOn(comp._instance, 'testMethodWithArgs').and.callThrough();
     const res = comp.testMethodWithArgs('hello', 'world');
-    expect(comp._instance.testMethodWithArgs).toHaveBeenCalledWith('hello', 'world');
+    expect(comp._instance.testMethodWithArgs).toHaveBeenCalledWith(
+      'hello',
+      'world'
+    );
     expect(res).toEqual(2);
   });
-
 });

@@ -1,5 +1,18 @@
-import { Component, Input, Output, ElementRef, Renderer, OnInit, OnDestroy, EventEmitter } from '@angular/core';
-import { FBMLAttribute, FBMLComponent, FBMLInstanceMethod } from '../fbml-component';
+import {
+  Component,
+  Input,
+  Output,
+  ElementRef,
+  Renderer2,
+  OnInit,
+  OnDestroy,
+  EventEmitter
+} from '@angular/core';
+import {
+  FBMLAttribute,
+  FBMLComponent,
+  FBMLInstanceMethod
+} from '../fbml-component';
 declare var FB: any;
 
 /**
@@ -41,8 +54,8 @@ declare var FB: any;
   selector: 'fb-video',
   template: ''
 })
-export class FBVideoComponent extends FBMLComponent implements OnInit, OnDestroy {
-
+export class FBVideoComponent extends FBMLComponent
+  implements OnInit, OnDestroy {
   private _instance: any;
 
   /**
@@ -128,12 +141,10 @@ export class FBVideoComponent extends FBMLComponent implements OnInit, OnDestroy
 
   private _listeners: any[] = [];
 
-  constructor(
-    el: ElementRef,
-    rnd: Renderer
-  ) {
+  constructor(el: ElementRef, rnd: Renderer2) {
     super(el, rnd, 'fb-video');
-    this.nativeElement.id = this._id = 'video-' + String(Math.floor((Math.random() * 10000) + 1));
+    this.nativeElement.id = this._id =
+      'video-' + String(Math.floor(Math.random() * 10000 + 1));
   }
 
   /**
@@ -144,11 +155,19 @@ export class FBVideoComponent extends FBMLComponent implements OnInit, OnDestroy
       if (msg.type === 'video' && msg.id === this._id) {
         this._instance = msg.instance;
         this._listeners.push(
-          this._instance.subscribe('startedPlaying', (e: any) => this.startedPlaying.emit(e)),
+          this._instance.subscribe('startedPlaying', (e: any) =>
+            this.startedPlaying.emit(e)
+          ),
           this._instance.subscribe('paused', (e: any) => this.paused.emit(e)),
-          this._instance.subscribe('finishedPlaying', (e: any) => this.finishedPlaying.emit(e)),
-          this._instance.subscribe('startedBuffering', (e: any) => this.startedBuffering.emit(e)),
-          this._instance.subscribe('finishedBuffering', (e: any) => this.finishedBuffering.emit(e)),
+          this._instance.subscribe('finishedPlaying', (e: any) =>
+            this.finishedPlaying.emit(e)
+          ),
+          this._instance.subscribe('startedBuffering', (e: any) =>
+            this.startedBuffering.emit(e)
+          ),
+          this._instance.subscribe('finishedBuffering', (e: any) =>
+            this.finishedBuffering.emit(e)
+          ),
           this._instance.subscribe('error', (e: any) => this.error.emit(e))
         );
       }
@@ -201,7 +220,9 @@ export class FBVideoComponent extends FBMLComponent implements OnInit, OnDestroy
    * Returns true if video is muted, false if not.
    */
   @FBMLInstanceMethod
-  isMuted(): boolean { return; }
+  isMuted(): boolean {
+    return;
+  }
 
   /**
    * Set the volume
@@ -214,7 +235,9 @@ export class FBVideoComponent extends FBMLComponent implements OnInit, OnDestroy
    * Get the volume
    */
   @FBMLInstanceMethod
-  getVolume(): number { return; }
+  getVolume(): number {
+    return;
+  }
 
   /**
    * Returns the current video time position in seconds
@@ -227,5 +250,4 @@ export class FBVideoComponent extends FBMLComponent implements OnInit, OnDestroy
    */
   @FBMLInstanceMethod
   getDuration() {}
-
 }

@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, Renderer } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2 } from '@angular/core';
 import { FBMLAttribute, FBMLComponent } from '../fbml-component';
 
 /**
@@ -17,7 +17,6 @@ import { FBMLAttribute, FBMLComponent } from '../fbml-component';
   template: ''
 })
 export class FBSaveComponent extends FBMLComponent {
-
   /**
    * The absolute link of the page that will be saved.
    * Current Link/Address
@@ -26,11 +25,7 @@ export class FBSaveComponent extends FBMLComponent {
   @FBMLAttribute
   uri: string = window.location.href;
 
-  constructor(
-    el: ElementRef,
-    rnd: Renderer
-  ) {
+  constructor(el: ElementRef, rnd: Renderer2) {
     super(el, rnd, 'fb-save');
   }
-
 }
